@@ -30,6 +30,9 @@ var/
 *.manifest
 *.spec
 
+# IDE
+.idea/
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -47,7 +50,6 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
 *.log
@@ -72,18 +74,9 @@ target/
 # pyenv
 .python-version
 
-# celery beat schedule file
-celerybeat-schedule
-
 # dotenv
 .env
 
 # virtualenv
 venv/
 ENV/
-
-# Spyder project settings
-.spyderproject
-
-# Rope project settings
-.ropeproject
