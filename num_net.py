@@ -1,5 +1,6 @@
 from model import NeuralNetwork
 from utils import load_csv, get_performance
+from artist import rotate_number
 
 
 def run():
@@ -27,9 +28,12 @@ def run():
     n = NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
     # Training
+    epochs = 5
     for e in range(epochs):
         print("Epoch: ", e)
         n.train_dataset(train_data)
+        n.train_dataset([rotate_number(i) for i in train_data])
+        n.train_dataset([rotate_number(i, -10) for i in train_data])
 
     # Testing - go through all the records in the test data set
     scorecard = n.test_dataset(test_data)

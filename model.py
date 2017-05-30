@@ -1,3 +1,4 @@
+import os
 import numpy
 # scipy.special for the sigmoid function expit()
 import scipy.special
@@ -133,18 +134,41 @@ class NeuralNetwork(object):
 
         return scorecard
 
-    def import_network(self, filename="export.nn"):
-        pass
+    def import_network(self, dir_name=None):
+        dir_name = dir_name.strip()
+        if dir_name:
+            if not dir_name.endswith("/"):
+                dir_name += "/"
+            if not os.path.exists(dir_name):
+                raise NotADirectoryError("Directory does not exist: " + dir_name)
 
-    def export_network(self, filename="export.nn"):
-        pass
+        with open(dir_name + 'input.npy', 'rb') as input_file:
+            self.w_input_hidden = numpy.load(input_file)
+
+        with open(dir_name + 'hidden.npy', 'rb') as hidden_file:
+            self.w_hidden_output = numpy.load(hidden_file)
+
+        self.input_nodes = len(self.w_input_hidden[0])
+        self.hidden_nodes = len(self.w_input_hidden)
+        self.output_nodes = len(self.w_hidden_output)
+
+    def export_network(self, dir_name=""):
+        dir_name = dir_name.strip()
+        if dir_name:
+            if not dir_name.endswith("/"):
+                dir_name += "/"
+            if not os.path.exists(dir_name):
+                os.makedirs(dir_name)
+
+        self.w_input_hidden.dump(dir_name + 'input.npy')
+        self.w_hidden_output.dump(dir_name + 'hidden.npy')
 
     def _gen_weights(self, nodes1, nodes2):
         """
         Generates a matrix of size [n1 x n2] with random doubles for weights
         :param nodes1: int: size of nodes
         :param nodes2: int: size of nodes in next layer
-        :return: matrix: Random
+        :return: matrix: numpy.ndarray
         """
 
         # Normal distribution of values with a standard deviation around 0.0

@@ -86,3 +86,6 @@ ENV/
 
 # Data sets
 data/*.csv
+
+#NN
+save/
