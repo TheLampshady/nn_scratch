@@ -18,9 +18,9 @@ def draw_dream(number_row):
 def rotate_number(img, degree=10):
     arr_img = to_nn_input(img)
     result = scipy.ndimage.interpolation.rotate(
-        arr_img.reshape(28,28),
+        arr_img.reshape(28, 28),
         degree,
         cval=0.01,
         reshape=False
     )
-    return [0] + list(result.reshape(784))
+    return [0] + result.reshape(784).tolist()
