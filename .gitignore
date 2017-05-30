@@ -80,3 +80,9 @@ target/
 # virtualenv
 venv/
 ENV/
+
+# Macs
+.DS_store
+
+# Data sets
+data/*.csv
